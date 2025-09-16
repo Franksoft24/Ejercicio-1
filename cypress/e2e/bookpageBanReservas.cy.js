@@ -18,7 +18,7 @@ describe("Practica 1 - Prueba de la pagina de libros", () => {
         cy.get('#userName').type(userData.username); // Ingresar un usuario correcto
         cy.get('#password').type(userData.password); // Ingresar una contraseña correcta
         cy.get('#login').click(); // Hacer click en el boton de Login
-        cy.get('#userName-value').should('contain', user); // Verificar que se muestre el nombre del usuario logueado
+        cy.get('#userName-value').should('contain', userData.username); // Verificar que se muestre el nombre del usuario logueado
     });
     it('Buscar libro existente utilizando palabras claves', () => {
         cy.get('#searchBox').type('JavaScript'); // Ingresar el nombre del libro a buscar
@@ -26,6 +26,7 @@ describe("Practica 1 - Prueba de la pagina de libros", () => {
     });
     it('Buscar libro inexistente', () => {
         cy.get('#searchBox').type('ISTQB Fundamentals'); // Ingresar el nombre del libro a buscar
+        cy.screenshot("No-book-found"); // Tomar una captura de pantalla del estado actual de la pagina
         cy.get('.rt-noData').should('contain', 'No rows found'); // Verificar que se muestre el mensaje de no se encontraron libros
     });
 });
